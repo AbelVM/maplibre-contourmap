@@ -1,0 +1,33 @@
+{
+  "name": "maplibre-contourmap",
+  "private": true,
+  "version": "0.0.1",
+  "description": "MapLibre custom protocol to turn points into contours",
+  "author": "Abel Vázquez Montoro",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/maplibre-contourmap.umd.cjs",
+  "module": "./dist/maplibre-contourmap.js",
+  "exports": {
+    ".": {
+      "import": "./dist/maplibre-contourmap.js",
+      "require": "./dist/maplibre-contourmap.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.1"
+  },
+  "dependencies": {
+    "@turf/tin": "^7.1.0",
+    "geojson-vt": "^4.0.2",
+    "vt-pbf": "^3.1.3"
+  }
+}
