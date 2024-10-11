@@ -9,7 +9,7 @@ const map = new maplibregl.Map({
     container: 'map',
     style: 'https://demotiles.maplibre.org/style.json', 
     center: [-2.9945918,39.8983039,0],
-    zoom: 10
+    zoom: 12
 });
 map.on('load', () => {
 
