@@ -19,13 +19,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "./build.sh && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
     "vite": "^5.4.1"
-  },
-  "dependencies": {
-    "@turf/tin": "^7.1.0"
   }
 }

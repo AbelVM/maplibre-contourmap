@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>maplibre-contourmap</title>
     <meta property="og:description" content="Initialize a map in an HTML element with MapLibre GL JS." />
@@ -8,53 +9,23 @@
     <link rel="icon" href="https://nimbi.es/favicon.ico" type="image/x-icon" />
     <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' />
     <script src='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'></script>
+    <script type="module" src='example.js' defer></script>
     <style>
-        body { margin: 0; padding: 0; }
-        html, body, #map { height: 100%; }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
     </style>
 </head>
+
 <body>
-<div id="map"></div>
-<script>
-    const map = new maplibregl.Map({
-        container: 'map',
-        style: 'https://demotiles.maplibre.org/style.json', 
-        center: [-2.9945918,39.8983039,0],
-        zoom: 5
-    });
-    map.on('load', () => {
-        map.addSource('points_source', {
-            type: 'vector',
-            tiles:[location.href.replace('index.html','assets/tiles/{z}/{x}/{y}.pbf')]
-        });
-        map.addLayer({
-            'id': 'points_layer',
-            'type': 'circle',
-            'source': 'points_source',
-            'source-layer': 'cotas',
-            'paint': {
-                'circle-radius': [
-                    'interpolate',
-                    ['linear'],
-                    ['zoom'],
-                    5, 2.5,
-                    19, 30
-                ],
-                'circle-color': [
-                      'interpolate-lab',
-                      ['linear'],
-                      ['get', 'COTA'],
-                      116,'#36a0a4',
-                      342,'#73829b',
-                      561,'#c05e90',
-                      765,'#ff5180',
-                      981,'#ff876c',
-                      1314,'#ffb65a',
-                      3360,'#ffdb4c'
-                  ]
-            }
-        });
-    });
-</script>
+    <div id="map"></div>
 </body>
+
 </html>
