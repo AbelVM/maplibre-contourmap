@@ -34,7 +34,7 @@ p.getHeader().then(h => {
                     ['linear'],
                     ['zoom'],
                     5, 2.5,
-                    19, 30
+                    19, 15
                 ],
                 'circle-color': [
                     'interpolate-lab',
@@ -64,7 +64,7 @@ p.getHeader().then(h => {
             'paint': {
                 'fill-color': '#ccc',
                 'fill-outline-color': '#000',
-                'fill-opacity': 0.25
+                'fill-opacity': 0.4
             }
         },'points_layer');
 
