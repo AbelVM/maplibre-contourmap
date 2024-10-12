@@ -29,13 +29,13 @@ p.getHeader().then(h => {
             'source': 'points_source',
             'source-layer': 'cotas',
             'paint': {
-                'circle-radius': [
+                'circle-radius': 2, /* [
                     'interpolate',
                     ['linear'],
                     ['zoom'],
                     5, 2.5,
-                    19, 15
-                ],
+                    10, 10
+                ], */
                 'circle-color': [
                     'interpolate-lab',
                     ['linear'],
@@ -57,16 +57,25 @@ p.getHeader().then(h => {
         });
 
         map.addLayer({
-            'id': 'cells',
-            'type': 'fill',
+            'id': 'lines',
+            'type': 'line',
             'source': 'contour-source-points_layer',
-            'layout': {},
             'paint': {
-                'fill-color': '#ccc',
-                'fill-outline-color': '#000',
-                'fill-opacity': 0.4
+                'line-width': 3,
+                'line-color':  [
+                    'step',
+                    ['get', 'break'],
+                    '#ffffff',
+                    116, '#36a0a4',
+                    342, '#73829b',
+                    561, '#c05e90',
+                    765, '#ff5180',
+                    981, '#ff876c',
+                    1314, '#ffb65a',
+                    3360, '#ffdb4c'
+                    ]
             }
-        },'points_layer');
+        });
 
         //debugger
         window.map = map;
