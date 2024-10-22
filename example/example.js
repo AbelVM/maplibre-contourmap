@@ -12,7 +12,7 @@ init(maplibregl);
 
 const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', protocol.tile);
-const PMTILES_URL = location.href.replace('index.html', 'assets/cotas.pmtiles');
+const PMTILES_URL = (location.href.indexOf('index.html') == -1) ? location.href + 'assets/cotas.pmtiles' : location.href.replace('index.html', 'assets/cotas.pmtiles');
 const p = new pmtiles.PMTiles(PMTILES_URL);
 protocol.add(p);
 p.getHeader().then(h => {
