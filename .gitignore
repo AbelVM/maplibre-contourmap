@@ -2,7 +2,7 @@
 tiles
 contour2.js
 test.json
-externals/dist/
+lib/externals/dist/
 
 # Logs
 logs
