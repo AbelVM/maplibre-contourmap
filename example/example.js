@@ -2,6 +2,11 @@
 
 import init from '../dist/maplibre-contourmap.js';
 
+const 
+    breaks = [116, 342, 561, 765, 981, 1314, 3360],
+    // 'LA' color scale by Abel Vázquez Montoro
+    colors =['#36a0a4','#73829b','#c05e90','#ff5180','#ff876c','#ffb65a','#ffdb4c'];
+
 // add the add/remove functions to Map prototype
 init(maplibregl);
 
@@ -18,11 +23,14 @@ p.getHeader().then(h => {
         center: [-3, 41] //[h.centerLon, h.centerLat]
     });
     map.on('load', () => {
-        // Raw points layer
+
+        // Raw points source
         map.addSource('points_source', {
             type: 'vector',
             url: `pmtiles://${PMTILES_URL}`
         });
+
+        // Raw points layer
         map.addLayer({
             'id': 'points_layer',
             'type': 'circle',
@@ -40,22 +48,25 @@ p.getHeader().then(h => {
                     'interpolate-lab',
                     ['linear'],
                     ['get', 'COTA'],
-                    116, '#36a0a4',
-                    342, '#73829b',
-                    561, '#c05e90',
-                    765, '#ff5180',
-                    981, '#ff876c',
-                    1314, '#ffb65a',
-                    3360, '#ffdb4c'
+                    breaks[0], colors[0],
+                    breaks[1], colors[1],
+                    breaks[2], colors[2],
+                    breaks[3], colors[3],
+                    breaks[4], colors[4],
+                    breaks[5], colors[5],
+                    breaks[6], colors[6]
                 ]
             }
         });
 
+        // Contour map source,
+        // linked to the former points layer and its COTAS property
         map.addContourSource('points_layer', {
             'measure': 'COTA',
-            'breaks': [116, 342, 561, 765, 981, 1314, 3360]
+            'breaks': breaks
         });
 
+        // Line layer the for contour map
         map.addLayer({
             'id': 'lines',
             'type': 'line',
@@ -66,13 +77,13 @@ p.getHeader().then(h => {
                     'step',
                     ['get', 'break'],
                     '#ffffff',
-                    116, '#36a0a4',
-                    342, '#73829b',
-                    561, '#c05e90',
-                    765, '#ff5180',
-                    981, '#ff876c',
-                    1314, '#ffb65a',
-                    3360, '#ffdb4c'
+                    breaks[0], colors[0],
+                    breaks[1], colors[1],
+                    breaks[2], colors[2],
+                    breaks[3], colors[3],
+                    breaks[4], colors[4],
+                    breaks[5], colors[5],
+                    breaks[6], colors[6]
                     ]
             }
         });
