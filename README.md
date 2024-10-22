@@ -32,6 +32,7 @@ In order to add this plugin to your Maplibre app, you need to import the module 
 import init from 'maplibre-contourmap.js';
 init(maplibregl);
 ```
+
 Now we have two new `maplibregl.Map` methods, that needs the name of the points layer to be targeted:
 
 * `addContourSource`(input_layer_name, options_object): once added, a new geoJSON **multilinestring** source is added to the map, called `contour-source-input_layer_name`
