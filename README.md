@@ -2,13 +2,13 @@
 
 https://github.com/user-attachments/assets/b468f5f2-26c2-4353-b32d-1d8fb483e847
 
-This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-time, client-side, [contour map](https://en.wikipedia.org/wiki/Contour_line) (isolines, isopleths,...) based on the data provided by a scattered **points** vector layer.
+This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-time, client-side, [contour map](https://en.wikipedia.org/wiki/Contour_line) (isolines, isopleths, whatever you wanna call it 😅) based on the data provided by a scattered points vector layer.
 
 One of the main advantages of the approeach used here is that source points don't need to be regularly placed in a grid, as we are using the [meandering triangles](https://en.wikipedia.org/wiki/Marching_squares#Contouring_triangle_meshes) variation of the [marching squares](https://en.wikipedia.org/wiki/Marching_squares) algorithm, that allows us to use scattered points and work on a [TIN](https://en.wikipedia.org/wiki/Triangulated_irregular_network) defined by those points
 
 ## How it works
 
-As the points are arbitrarily scattered, we can't foresee the placement of the points in the tiles. That tiny detail forces us to process the whole available data at once every time the user moves around the map, and refrains us from using [custom protocols](https://maplibre.org/maplibre-gl-js/docs/API/functions/addProtocol/) to process tiles data on the fly before rendering. So we need to trigfger the generation of the contour map once new data is loaded for the linked points layer.
+As the points are arbitrarily scattered, we can't foresee the placement of the points in the tiles. That tiny detail forces us to process the whole available data at once every time the user moves around the map, and refrains us from using [custom protocols](https://maplibre.org/maplibre-gl-js/docs/API/functions/addProtocol/) to process tiles data on the fly before rendering. So we need to trigger the generation of the contour map once new data is loaded for the linked points layer.
 
 To improve the performance and avoid UI jerkyness, we've used two common techniques here:
 
@@ -92,7 +92,7 @@ map.on('load', () => {
 
 ## Dependencies
 
-The only external dependency is [@turf/tin](https://turfjs.org/docs/api/tin), that is side-loaded and embedded within the worker in development time. Think of it as dev dependency.
+The only external dependency is [@turf/tin](https://turfjs.org/docs/api/tin), that is side-loaded and embedded within the worker in development time. Think of it as a dev dependency.
 
 `The whole plugin is self-contained in a single 8.6kB file`
 
