@@ -2,7 +2,7 @@
 
 https://github.com/user-attachments/assets/b468f5f2-26c2-4353-b32d-1d8fb483e847
 
-This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-time, client-side, [contour map](https://en.wikipedia.org/wiki/Contour_line) (isolines, isopleths,...) based on the data provided by a scattered **points** layer.
+This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-time, client-side, [contour map](https://en.wikipedia.org/wiki/Contour_line) (isolines, isopleths,...) based on the data provided by a scattered **points** vector layer.
 
 One of the main advantages of the approeach used here is that source points don't need to be regularly placed in a grid, as we are using the [meandering triangles](https://en.wikipedia.org/wiki/Marching_squares#Contouring_triangle_meshes) variation of the [marching squares](https://en.wikipedia.org/wiki/Marching_squares) algorithm, that allows us to use scattered points and work on a [TIN](https://en.wikipedia.org/wiki/Triangulated_irregular_network) defined by those points
 
