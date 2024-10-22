@@ -13,7 +13,7 @@ As the points are arbitrarily scattered, we can't foresee the placement of the p
 To improve the performance and avoid UI jerkyness, we've used two common techniques here:
 
 * [Webworkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API), so everything is computed out of the main thread
-* [Memoization](https://en.wikipedia.org/wiki/Memoization). Due to the nature of the algotrithm itself and the need to regenerate the whole contour map as new data is gathered, there is a lot of cells and segments that would be processed multiple times, wasting CPU time. So we memoize both processes (cells and segments) within the worker itself, so it doesn't leak. Une of the main caveats of memoization is the chance of a huge impact on consumed memory, but the approach used here keeps it under reasonable limits
+* [Memoization](https://en.wikipedia.org/wiki/Memoization). Due to the nature of the algotrithm itself and the need to regenerate the whole contour map as new data is gathered, there is a lot of cells and segments that would be processed multiple times, wasting CPU time. So we memoize both processes (cells and segments) within the worker itself, so it doesn't leak. One of the main potential caveats of memoization is the chance of a huge impact on consumed memory, but the approach used here keeps it under reasonable limits
 
 ## How to use
 
