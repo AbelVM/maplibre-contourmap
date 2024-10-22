@@ -6,6 +6,10 @@ This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-tim
 
 One of the main advantages of the approeach used here is that source points don't need to be regularly placed in a grid, as we are using the [meandering triangles](https://en.wikipedia.org/wiki/Marching_squares#Contouring_triangle_meshes) variation of the [marching squares](https://en.wikipedia.org/wiki/Marching_squares) algorithm, that allows us to use scattered points and work on a [TIN](https://en.wikipedia.org/wiki/Triangulated_irregular_network) defined by those points
 
+You can play with the example in the video above at
+
+https://abelvm.github.io/maplibre-contourmap/example/
+
 ## How it works
 
 As the points are arbitrarily scattered, we can't foresee the placement of the points in the tiles. That tiny detail forces us to process the whole available data at once every time the user moves around the map, and refrains us from using [custom protocols](https://maplibre.org/maplibre-gl-js/docs/API/functions/addProtocol/) to process tiles data on the fly before rendering. So we need to trigger the generation of the contour map once new data is loaded for the linked points layer.
