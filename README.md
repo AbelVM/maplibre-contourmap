@@ -2,7 +2,7 @@
 
 https://github.com/user-attachments/assets/b468f5f2-26c2-4353-b32d-1d8fb483e847
 
-This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-time, client-side, [contour map](https://en.wikipedia.org/wiki/Contour_line) (isolines, isopleths, whatever you wanna call it 😅) based on the data provided by a scattered points vector layer.
+This [MaplibreGL JS](https://maplibre.org/) plugin allows to generate a real-time, client-side, [contour map](https://en.wikipedia.org/wiki/Contour_line) (isolines, isopleths, whatever you wanna call it 😅) based on the data provided by a scattered points vector (tiled or geoJSON) layer.
 
 One of the main advantages of the approeach used here is that source points don't need to be regularly placed in a grid, as we are using the [meandering triangles](https://en.wikipedia.org/wiki/Marching_squares#Contouring_triangle_meshes) variation of the [marching squares](https://en.wikipedia.org/wiki/Marching_squares) algorithm, that allows us to use scattered points and work on a [TIN](https://en.wikipedia.org/wiki/Triangulated_irregular_network) defined by those points
 
@@ -12,7 +12,7 @@ https://abelvm.github.io/maplibre-contourmap/example/
 
 ## How it works
 
-As the points are arbitrarily scattered, we can't foresee the placement of the points in the tiles. That tiny detail forces us to process the whole available data at once every time the user moves around the map, and refrains us from using [custom protocols](https://maplibre.org/maplibre-gl-js/docs/API/functions/addProtocol/) to process tiles data on the fly before rendering. So we need to trigger the generation of the contour map once new data is loaded for the linked points layer.
+As the points are arbitrarily scattered, we can't foresee the placement of the points in the tiles. That tiny detail forces us to process the whole available data at once every time the user moves around the map, and refrains us from using [custom protocols](https://maplibre.org/maplibre-gl-js/docs/API/functions/addProtocol/) to process data on the fly, tile by tile, before rendering. So we need to trigger the generation of the contour map once new data is loaded for the linked points layer.
 
 To improve the performance and avoid UI jerkyness, we've used two common techniques here:
 
@@ -37,7 +37,7 @@ import init from 'maplibre-contourmap.js';
 init(maplibregl);
 ```
 
-Now we have two new `maplibregl.Map` methods, that needs the name of the points layer to be targeted:
+Now we have two new `maplibregl.Map` methods, that needs the name of the **points** layer to be targeted:
 
 * `addContourSource`(input_layer_name, options_object): once added, a new geoJSON **multilinestring** source is added to the map, called `contour-source-input_layer_name`
 * `removeContourSource`(input_layer_name) : to remove the contour map source
@@ -83,7 +83,7 @@ map.on('load', () => {
 
     // Line layer the for contour map
     map.addLayer({
-        'id': 'lines',
+        'id': 'isolines',
         'type': 'line',
         'source': 'contour-source-points_layer',
         ...
@@ -92,18 +92,18 @@ map.on('load', () => {
 });
 ```
 
-**The original points layer must be visible, otherwise its source data won't be loeaded. If you want to hide the points layer, use paint property `opacity` instead of layout property `visible`**
+**The original points layer must be visible, otherwise its source data won't be loaded. If you want to hide the points layer, use paint property `opacity` instead of layout property `visible`**
 
 ## Dependencies
 
-The only external dependency is [@turf/tin](https://turfjs.org/docs/api/tin), that is side-loaded and embedded within the worker in development time. Think of it as a dev dependency.
+The only external dependency is [@turf/tin](https://turfjs.org/docs/api/tin), that is side-loaded and embedded within the worker in development time.
 
 `The whole plugin is self-contained in a single 8.6kB file`
 
 ## To-Do's
 
-* Work with GeoJSON sources too
+* If the source is GeoJSON, add the option to process the whole data just once
 * Verify geometry are points and get centroids if not
-* worker pool
+* dynamic worker pool
 * separete workers for cells and segments
-* corner cases in tiles' boundaries
+* corner cases in tiles' boundaries when panning
